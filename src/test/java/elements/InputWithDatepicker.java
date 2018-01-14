@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
@@ -18,11 +19,15 @@ public class InputWithDatepicker  extends AbstractBaseElement {
 
 
     private static final By ICON_CLICKABLE_LOCATOR = new By.ByXPath("parent::div/descendant::span[contains(@class,\"datepicker-trigger\")]");
+    private static final By INPUT_LOCATOR = new By.ByXPath("descendant::input[@type=\"text\"]");
     private static By DAY_SELECT_LOCATOR = new By.ByXPath("parent::div/following::div/select[@class=\"date-day\"]");
     private static By MONTH_SELECT_LOCATOR = new By.ByXPath("parent::div/following::div/select[@class=\"date-month\"]");
     private static By YEAR_SELECT_LOCATOR = new By.ByXPath("parent::div/following::div/select[@class=\"date-year\"]");
     private static DatapickerContainer calendar = null;
     private static By CALENDAR_LOCATOR = new By.ByXPath("//div[@data-date-picker-placeholder]");
+
+    private static final String DATE_FORMAT = "dd-MM-yyyy";
+
 
     private static final String CLASS_DISABLED = "placeholder-as-if-input";
 
@@ -76,5 +81,17 @@ public class InputWithDatepicker  extends AbstractBaseElement {
     public void assertIsDisabled() {
         String cssClass = getWrappedElement().getAttribute("class");
         Assert.assertTrue(cssClass.contains(CLASS_DISABLED));
+    }
+
+    public void setDate(LocalDate date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
+        String dateString = date.format(formatter);
+        TextBox tbDate = new TextBox(findElement(INPUT_LOCATOR));
+        tbDate.clear();
+        tbDate.type(dateString);
+      //  tbDate.sendKeys(Keys.TAB);
+
+
+
     }
 }

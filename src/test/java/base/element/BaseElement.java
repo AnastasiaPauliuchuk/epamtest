@@ -36,7 +36,7 @@ public abstract class BaseElement extends Base {
         return ElementLogger.getInstance();
     }
 
-    abstract public void init();
+     abstract public void init();
     /*public BaseElement(WebElement wrappedElement) {
 
         this.wrappedElement = wrappedElement;
@@ -91,9 +91,30 @@ public abstract class BaseElement extends Base {
      * Click on the item.
      */
     public void click() {
-        wrappedElement.click();
-        info("click");
+        if(this.isElementClickable()){
+            wrappedElement.click();
+            info("click");
+        }
 
+
+    }
+
+    private boolean isElementClickable() {
+
+        try {
+            Wait<WebDriver> wait =
+                    new FluentWait<WebDriver>(Browser.getInstance().getDriver())
+                            .withTimeout(Long.parseLong(Browser.getInstance().getTimeoutForLoad()), TimeUnit.SECONDS)
+                            .pollingEvery(Long.parseLong(Browser.getInstance().getTimeoutForCondition()), TimeUnit.SECONDS);
+
+
+            wait.until(ExpectedConditions.elementToBeClickable(wrappedElement));
+            return true;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     /**

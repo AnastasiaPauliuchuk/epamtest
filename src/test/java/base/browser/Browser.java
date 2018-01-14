@@ -58,8 +58,8 @@ public class Browser extends Base {
             try {
                 driver = BrowserFactory.setUp(currentBrowser.toString());
                 driver.manage().timeouts().implicitlyWait(IMPLICITY_WAIT, TimeUnit.SECONDS);
-               /* driver.manage().timeouts().setScriptTimeout(60,TimeUnit.SECONDS);
-                driver.manage().timeouts().pageLoadTimeout(60,TimeUnit.SECONDS);*/
+                driver.manage().timeouts().setScriptTimeout(500,TimeUnit.SECONDS);
+                /*driver.manage().timeouts().pageLoadTimeout(60,TimeUnit.SECONDS);*/
             } catch (NamingException e) {
                 e.printStackTrace();
             }
@@ -85,7 +85,9 @@ public class Browser extends Base {
     }
 
     public void open() {
-        driver.get(props.getProperty(START_URL_PROP));
+
+       driver.get(props.getProperty(START_URL_PROP));
+
     }
 
 

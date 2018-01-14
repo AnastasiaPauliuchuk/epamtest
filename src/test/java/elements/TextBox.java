@@ -26,6 +26,7 @@ public class TextBox extends AbstractBaseElement {
     }
 
     public void clear() {
+        wrappedElement.click();
         String selectAll = Keys.chord(Keys.CONTROL, "a");
         wrappedElement.sendKeys(selectAll);
         wrappedElement.sendKeys(Keys.DELETE);

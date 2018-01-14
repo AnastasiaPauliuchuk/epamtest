@@ -82,15 +82,15 @@ public class InputPassengersExtended extends BaseContainer {
 
     public PassengerSet setPassengersCountBySpinner(PassengerSet passengerSet) {
         openContainer();
-        /*adultCount.setFieldBySpinner(passengerSet.getAdultCount());
-        childCount.setFieldBySpinner(passengerSet.getChildCount());*/
+        adultCount.setFieldBySpinner(passengerSet.getAdultCount());
+        childCount.setFieldBySpinner(passengerSet.getChildCount());
         babyCount.setFieldBySpinner(passengerSet.getBabyCount());
         btnSave.click();
         return passengerSet;
     }
 
     public void assertAdultPersonCount(int count) {
-        WebElement el = findElement(new By.ByXPath(VALUE_LOCATOR));
+        WebElement el = passengerInput.findElement(new By.ByXPath(VALUE_LOCATOR));
         String value = el.getAttribute("innerHTML");
         Pattern p = Pattern.compile(COUNT_ADULT_PERSON_REGEXP);
         Matcher m = p.matcher(value);
@@ -103,7 +103,7 @@ public class InputPassengersExtended extends BaseContainer {
     }
 
     public void assertPassengerSet(PassengerSet pSet) {
-        WebElement el = findElement(new By.ByXPath(VALUE_LOCATOR));
+        WebElement el = passengerInput.findElement(new By.ByXPath(VALUE_LOCATOR));
         String value = el.getAttribute("innerHTML");
         //parse string
     }

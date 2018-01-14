@@ -22,7 +22,7 @@ public class SearchFormFillTest extends BaseTest {
 
     @Override
     public void runTest() {
-
+        Browser.getInstance().getDriver().navigate().refresh();
         step(1,"Open main page");
         MainSearchPage firstPage = new MainSearchPage("Start Page");
         firstPage.init((WebDriver) Browser.getInstance().getDriver());

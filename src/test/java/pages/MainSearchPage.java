@@ -27,10 +27,11 @@ public class MainSearchPage extends BasePage {
     @FindBy(xpath = "//input[@id=\"dateSelection_IsReturnFlight\" and @value=\"true\"]")
     private CheckBox checkReturn;
 
+    //todo locator=div
     @FindBy(id = "dateSelection_IsReturnFlight-datepicker")
     private InputWithDatepicker returnDateInput;
 
-
+//todo locator=div
     @FindBy(id="dateSelection_OutboundDate-datepicker")
     private InputWithDatepicker flightDateInput;
 
@@ -39,6 +40,9 @@ public class MainSearchPage extends BasePage {
 
     @FindBy(xpath="//section[@data-package=\"search\"]//button[@type=\"submit\"]")
     private Button searchButton;
+
+    @FindBy(xpath = "//a[@data-module=\"ui/CombinationFlightHelper\"]")
+    private Link multipleDestinationsLink;
 
     public MainSearchPage(String name) {
         super(name);
@@ -115,4 +119,7 @@ public class MainSearchPage extends BasePage {
     }
 
 
+    public void goMultipleDestination() {
+        multipleDestinationsLink.click();
+    }
 }

@@ -15,8 +15,8 @@ public abstract class AbstractBaseElement extends BaseElement {
         this.wrappedElement = wrappedElement;
 
     }
-    public void init() {
-        info("init");
+   public void init() {
+
 
     }
 

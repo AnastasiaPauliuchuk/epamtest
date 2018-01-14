@@ -2,13 +2,13 @@
 <!--<?xml version="1.0" encoding="UTF-8"?>-->
 <suite name="Test Plan" verbose="1">
 
-   <!-- <test name="Form filling test" preserve-order="true">
+    <!--<test name="Form filling test" preserve-order="true">
         <classes>
             <class name="tests.SearchFormFillTest"/>
 
         </classes>
     </test>-->
-    <test name="Total price test" preserve-order="true">
+    <!--<test name="Total price test" preserve-order="true">
         <parameter name="departure" value="Dublin"/>
         <parameter name="arrival" value="Paris"/>
         <parameter name="passengers.adult" value="2"/>
@@ -19,5 +19,26 @@
             <class name="tests.VerifyCostTest"/>
 
         </classes>
-    </test>
-</suite>
+    </test>-->
+   <!-- <test name="Not found flight test" preserve-order="true">
+        <parameter name="departure" value="Dubai"/>
+        <parameter name="arrival" value="Agadir"/>
+
+        <classes>
+            <class name="tests.NoFlightFoundTest"/>
+
+        </classes>
+    </test>-->
+    <test name="Combination of flights" preserve-order="true">
+        <parameter name="outboundDeparture" value="Bologna"/>
+        <parameter name="outboundArrival" value="Eindhoven"/>
+        <parameter name="outboundDate" value="2018/05/02"/>
+        <parameter name="inboundDeparture" value="Amsterdam"/>
+        <parameter name="inboundArrival" value="Casablanca"/>
+        <parameter name="inboundDate" value="2018/05/12"/>
+
+        <classes>
+            <class name="tests.VerifyCombinationFlightCostTest"/>
+
+        </classes>
+    </test></suite>
