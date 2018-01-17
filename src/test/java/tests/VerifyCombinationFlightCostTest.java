@@ -56,11 +56,18 @@ public class VerifyCombinationFlightCostTest extends BaseTest {
         flightCombinationPage.selectInboundArrival(inboundArrival);
         flightCombinationPage.setInboundDate(inboundDate);
 
-        SearchResultPage secondPage = new SearchResultPage("Search results");
-        secondPage.init((WebDriver) Browser.getInstance().getDriver());
+        flightCombinationPage.search();
+        SearchResultPage searchResultPage = new SearchResultPage("Search results");
+        searchResultPage.init((WebDriver) Browser.getInstance().getDriver());
         check("Verify availiable flights");
-        secondPage.assertFlightAvailiable();
-        try {
+        searchResultPage.assertFlightAvailiable();
+
+        searchResultPage.selectNearestOutboundDay();
+        searchResultPage.selectNearestInboundDay();
+
+        check("Verify total price");
+            searchResultPage.assertPrice();
+            try {
             Thread.sleep(6000);
         } catch (InterruptedException e) {
             e.printStackTrace();

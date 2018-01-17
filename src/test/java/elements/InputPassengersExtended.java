@@ -5,7 +5,6 @@ import base.element.BaseContainer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.testng.Assert;
 import utils.PassengerSet;
 
 import java.util.regex.Matcher;
@@ -98,8 +97,7 @@ public class InputPassengersExtended extends BaseContainer {
         if (m.find()) {
             i = Integer.parseInt(m.group(1));
         }
-        Assert.assertEquals(i, count);
-        assertInfo(i, count);
+        assertEquals(count,i );
     }
 
     public void assertPassengerSet(PassengerSet pSet) {

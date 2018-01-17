@@ -20,6 +20,6 @@ public class Label extends AbstractBaseElement {
 
 
     public String getText() {
-        return getWrappedElement().getText();
+        return getWrappedElement().getAttribute("innerHTML");
     }
 }

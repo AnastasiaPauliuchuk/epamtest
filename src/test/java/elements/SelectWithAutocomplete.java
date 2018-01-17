@@ -3,7 +3,6 @@ package elements;
 import base.element.AbstractBaseElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 
 /**
  * @author Anastasia Pauliuchuk
@@ -13,7 +12,8 @@ public class SelectWithAutocomplete extends AbstractBaseElement {
 
 
     private static final String OPTION_BY_INDEX_SELECTOR_TEMPLATE_XPATH = "//ol[@class=\"results\"]/li[@data-relative-index=%d]";
-    private static final String OPTION_BY_TEXT_SELECTOR_TEMPLATE_XPATH = "//ol[@class=\"results\"]//*[contains(text(),\"%s\")]/parent::li";
+  //  private static final String OPTION_BY_TEXT_SELECTOR_TEMPLATE_XPATH = "//ol[@class=\"results\"]//*[contains(text(),\"%s\")]/parent::li";
+      private static final String OPTION_BY_TEXT_SELECTOR_TEMPLATE_XPATH = "//ol[@class=\"results\"]//*[contains(text(),\"%s\")]";
 
     private static final String OPTION_BY_INDEX_RELOADED_SELECTOR_TEMPLATE_XPATH =
             "//ol[@class=\"results\"]/li[@data-relative-index=%d and @data-parent-index=0]";
@@ -53,6 +53,7 @@ public class SelectWithAutocomplete extends AbstractBaseElement {
     }*/
 
     public String searchAndSelect(String placeName) {
+        wrappedElement.clear();
         wrappedElement.sendKeys(placeName);
         WebElement el = wrappedElement.findElement(getOptionLocator(placeName));
         String value = el.getAttribute("innerHTML");
@@ -65,8 +66,7 @@ public class SelectWithAutocomplete extends AbstractBaseElement {
 
     public void assertSelectedText(String selectedValue) {
         String actual = getElementText();
-        assertInfo(selectedValue,actual);
-        Assert.assertEquals(selectedValue,actual);
+        assertEquals(actual,selectedValue);
 
     }
 

@@ -16,8 +16,6 @@ public abstract class AbstractBaseElement extends BaseElement {
 
     }
    public void init() {
-
-
     }
 
 

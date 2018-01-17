@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -25,6 +26,8 @@ public class InputWithDatepicker  extends AbstractBaseElement {
     private static By YEAR_SELECT_LOCATOR = new By.ByXPath("parent::div/following::div/select[@class=\"date-year\"]");
     private static DatapickerContainer calendar = null;
     private static By CALENDAR_LOCATOR = new By.ByXPath("//div[@data-date-picker-placeholder]");
+
+    private static By SUGGEST_LABEL_LOCATOR = new By.ByXPath("parent::div[@data-suggestion-label]");
 
     private static final String DATE_FORMAT = "dd-MM-yyyy";
 
@@ -61,7 +64,7 @@ public class InputWithDatepicker  extends AbstractBaseElement {
     public void assertDaySelected(int day) {
         Select daySelected = new Select(wrappedElement.findElement(DAY_SELECT_LOCATOR));
         String dayOption= daySelected.getFirstSelectedOption().getText();
-        Assert.assertEquals(dayOption,day);
+        assertEquals(dayOption,day);
     }
 
     @Override
@@ -73,13 +76,14 @@ public class InputWithDatepicker  extends AbstractBaseElement {
         int day = Integer.parseInt(findElement(DAY_SELECT_LOCATOR).getAttribute("value"));
         int month = Integer.parseInt(findElement(MONTH_SELECT_LOCATOR).getAttribute("value"));
         int year = Integer.parseInt(findElement(YEAR_SELECT_LOCATOR).getAttribute("value"));
-        assertInfo(LocalDate.of(year,month,day),date);
-        Assert.assertEquals(LocalDate.of(year,month,day),date);
+        assertEquals(date,LocalDate.of(year,month,day));
 
     }
 
     public void assertIsDisabled() {
-        String cssClass = getWrappedElement().getAttribute("class");
+        TextBox tbDate = new TextBox(findElement(INPUT_LOCATOR));
+        String cssClass = tbDate.getWrappedElement().getAttribute("class");
+        checkInfo("Input is disabled","true");
         Assert.assertTrue(cssClass.contains(CLASS_DISABLED));
     }
 
@@ -89,8 +93,18 @@ public class InputWithDatepicker  extends AbstractBaseElement {
         TextBox tbDate = new TextBox(findElement(INPUT_LOCATOR));
         tbDate.clear();
         tbDate.type(dateString);
-      //  tbDate.sendKeys(Keys.TAB);
 
+
+
+    }
+
+    public void setDateCalendar(LocalDate date) {
+        LocalDate dateToday = LocalDate.now();
+        Period period = Period.between(date, dateToday);
+        long monthCount = period.toTotalMonths();
+        calendar = openCalendar();
+        calendar.switchMonth(monthCount);
+        calendar.selectDay(date.getDayOfMonth());
 
 
     }

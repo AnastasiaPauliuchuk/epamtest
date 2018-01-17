@@ -12,9 +12,6 @@ public abstract class BaseContainer extends BaseElement {
         this.wrappedElement = wrappedElement;
     }
 
-    public boolean isDisplayed() {
-        return getWrappedElement().isDisplayed();
-    }
 
     @Override
     public void init() {}
@@ -24,10 +21,5 @@ public abstract class BaseContainer extends BaseElement {
         return "Container";
     }
 
-    /*public abstract WebElement getMainElement() ;
 
-    @Override
-    public WebElement getWrappedElement() {
-        return getMainElement();
-    }*/
 }

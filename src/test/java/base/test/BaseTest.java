@@ -49,8 +49,11 @@ public abstract class BaseTest extends Base {
     public void check( String msg) {
         ((TestLogger)logger).check(this, msg);
     }
-    public void assertInfo(final Object expected, final Object actual) {
+   /* public void checkInfo(Object result, Object condition) {
+        ((TestLogger)logger).assertCheck(this,result,condition);
+    }*/
+   /* public void assertinfo(final Object expected, final Object actual) {
         ((TestLogger)logger).assertInfo(this,expected,actual);
-    }
+    }*/
 
 }

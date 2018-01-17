@@ -43,12 +43,11 @@ public class BrowserFactory {
                 ChromeOptions options = new ChromeOptions();
                 options.setExperimentalOption("prefs", chromePrefs);
                 options.addArguments("start-maximized", "disable-popup-blocking", "--incognito");
-                //options.addArguments("--lang=en-EU");
                 myTestURL = ClassLoader.getSystemResource("chromedriver.exe");
                 try {
                     myFile = new File(myTestURL.toURI());
                 } catch (URISyntaxException e1) {
-                  //  BaseLogger.getInstance().debug(e1.getMessage());
+
                 }
                 System.setProperty("webdriver.chrome.driver", myFile.getAbsolutePath());
 
@@ -67,7 +66,6 @@ public class BrowserFactory {
                 try {
                     myFile = new File(myTestURL.toURI());
                 } catch (URISyntaxException e1) {
-                    //BaseLogger.getInstance().debug(e1.getMessage());
                 }
 
                 System.setProperty("webdriver.gecko.driver", myFile.getAbsolutePath());
@@ -83,7 +81,7 @@ public class BrowserFactory {
                 return setUp(t);
             }
         }
-        throw new NamingException(/*getLoc("loc.browser.name.wrong") + ":\nchrome\nfirefox\niexplore\nopera\nsafari"*/ "Naming exception");
+        throw new NamingException("Naming exception");
     }
 }
 

@@ -42,7 +42,6 @@ public class Browser extends Base {
     private static String timeoutForNotDisplayed;
     public static Browsers currentBrowser;
 
-//    private static Logger logger = Logger.getLogger(Browser.class);
     private Browser() {
         info("constructed");
     }
@@ -59,7 +58,6 @@ public class Browser extends Base {
                 driver = BrowserFactory.setUp(currentBrowser.toString());
                 driver.manage().timeouts().implicitlyWait(IMPLICITY_WAIT, TimeUnit.SECONDS);
                 driver.manage().timeouts().setScriptTimeout(500,TimeUnit.SECONDS);
-                /*driver.manage().timeouts().pageLoadTimeout(60,TimeUnit.SECONDS);*/
             } catch (NamingException e) {
                 e.printStackTrace();
             }

@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
+import org.testng.Assert;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -36,8 +37,17 @@ abstract public class Base {
     protected void fatal(String msg) {
         logger.fatal(this, msg);
     }
-    public void assertInfo( final Object expected, final Object actual) {
+    public void assertinfo(final Object actual, final Object expected) {
        info(String.format("[Assertion: expected ='%1$s', actual = '%2$s'])",expected.toString(),actual.toString()));
+    }
+
+    public void checkInfo(final Object condition, final Object result) {
+        info(String.format("[Assertion: '%1$s' is '%2$s'])",condition.toString(),result.toString()));
+    }
+
+    public void assertEquals(final Object actual, final Object expected) {
+        assertinfo(actual,expected);
+        Assert.assertEquals(actual,expected);
     }
 
     public WebElement findElement(By by) {
@@ -79,15 +89,21 @@ abstract public class Base {
 
 
                 wait.until(ExpectedConditions.visibilityOfElementLocated(by));
-
-                info("is visible : " + true);
                 return true;
             } catch (Exception e) {
-                info("is visible : " + false);
                 return false;
             }
         }
         return false;
     }
 
+
+
+    public void waitReload(int millis) {
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }

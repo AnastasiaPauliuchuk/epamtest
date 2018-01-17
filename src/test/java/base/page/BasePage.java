@@ -1,11 +1,11 @@
 package base.page;
 
 import base.Base;
+import base.browser.Browser;
 import base.element.ExtendedFieldDecorator;
 import base.logging.BaseLogger;
 import base.logging.PageLogger;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
@@ -45,6 +45,20 @@ public abstract class BasePage extends Base {
     private void assertDisplayed() {
 
         Assert.assertTrue(isElementVisible(getMarkerLocator()));
+
+    }
+
+    public void scrollDown() {
+        JavascriptExecutor js = ((JavascriptExecutor) Browser.getInstance().getDriver());
+        js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+
+    }
+
+    public void scrollToElement(WebElement element) {
+        Point p = element.getLocation();
+        int y = p.getY();
+        JavascriptExecutor js = ((JavascriptExecutor) Browser.getInstance().getDriver());
+        js.executeScript(String.format("window.scrollTo(0, document.body.$d)"),y);
 
     }
 

@@ -2,13 +2,13 @@
 <!--<?xml version="1.0" encoding="UTF-8"?>-->
 <suite name="Test Plan" verbose="1">
 
-    <!--<test name="Form filling test" preserve-order="true">
+  <!--<test name="Form filling test" preserve-order="true">
         <classes>
             <class name="tests.SearchFormFillTest"/>
 
         </classes>
     </test>-->
-    <!--<test name="Total price test" preserve-order="true">
+   <!-- <test name="Total price test" preserve-order="true">
         <parameter name="departure" value="Dublin"/>
         <parameter name="arrival" value="Paris"/>
         <parameter name="passengers.adult" value="2"/>
@@ -20,16 +20,16 @@
 
         </classes>
     </test>-->
-   <!-- <test name="Not found flight test" preserve-order="true">
-        <parameter name="departure" value="Dubai"/>
-        <parameter name="arrival" value="Agadir"/>
+    <!--<test name="Not found flight test" preserve-order="true">
+         <parameter name="departure" value="Dubai"/>
+         <parameter name="arrival" value="Agadir"/>
 
-        <classes>
-            <class name="tests.NoFlightFoundTest"/>
+         <classes>
+             <class name="tests.NoFlightFoundTest"/>
 
-        </classes>
-    </test>-->
-    <test name="Combination of flights" preserve-order="true">
+         </classes>
+     </test>-->
+   <!-- <test name="Combination of flights" preserve-order="true">
         <parameter name="outboundDeparture" value="Bologna"/>
         <parameter name="outboundArrival" value="Eindhoven"/>
         <parameter name="outboundDate" value="2018/05/02"/>
@@ -41,4 +41,58 @@
             <class name="tests.VerifyCombinationFlightCostTest"/>
 
         </classes>
-    </test></suite>
+    </test>-->
+
+    <!--<test name="Verify the existing booking time" preserve-order="true">
+        <parameter name="bookingID" value="MF8C9R"/>
+        <parameter name="username" value="kucharau"/>
+        <parameter name="flightDate" value="2017/06/09"/>
+        <parameter name="flightDateFormat" value="yyyy/MM/dd"/>
+        <classes>
+            <class name="tests.VerifyBookedFlightTime"/>
+
+        </classes>
+    </test>
+    <test name="Verify the existing booking price" preserve-order="true">
+        <parameter name="bookingID" value="MF8C9R"/>
+        <parameter name="username" value="kucharau"/>
+        <parameter name="flightDate" value="2017/06/09"/>
+        <parameter name="flightDateFormat" value="yyyy/MM/dd"/>
+        <classes>
+            <class name="tests.VerifyBookedFlightPrice"/>
+
+        </classes>
+    </test>-->
+    <!--<test name="Verify the video" preserve-order="true">
+        <parameter name="expectedLink" value="https://www.youtube.com/watch?v=fQMuhniqWAg"/>
+        <parameter name="expectedTitle" value="Luggage"/>
+        <parameter name="expectedAuthor" value="Transavia"/>
+        <classes>
+            <class name="tests.VerifyHandLuggageVideoTest"/>
+
+        </classes>
+    </test>-->
+    <!--<test name="Verify flight destinations under budget" preserve-order="true">
+        <parameter name="departurePlace" value="Austria"/>
+        <parameter name="budget" value="200"/>
+
+        <classes>
+            <class name="tests.FlightsUnderBudgetTest"/>
+
+        </classes>
+    </test>-->
+    <test name="Not found flight test" preserve-order="true">
+        <parameter name="departure" value="Netherlands"/>
+        <parameter name="arrival" value="France"/>
+        <parameter name="flightDate" value="08/2018"/>
+        <parameter name="flightDateFormat" value="MM/yyyy"/>
+        <parameter name="expectedStation" value="Nice"/>
+        <parameter name="expectedCountry" value="France"/>
+        <parameter name="expectedPrice" value="29"/>
+
+        <classes>
+            <class name="tests.FindMinPriceFlightTest"/>
+        </classes>
+    </test>
+
+</suite>

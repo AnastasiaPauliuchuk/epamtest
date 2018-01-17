@@ -2,6 +2,7 @@ package pages;
 
 import base.page.BasePage;
 import elements.*;
+import elements.menu.TopMenu;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 import utils.PassengerSet;
@@ -28,11 +29,11 @@ public class MainSearchPage extends BasePage {
     private CheckBox checkReturn;
 
     //todo locator=div
-    @FindBy(id = "dateSelection_IsReturnFlight-datepicker")
+    @FindBy(xpath = "//input[@id=\"dateSelection_IsReturnFlight-datepicker\"]/parent::div")
     private InputWithDatepicker returnDateInput;
 
 //todo locator=div
-    @FindBy(id="dateSelection_OutboundDate-datepicker")
+    @FindBy(xpath = "//input[@id=\"dateSelection_OutboundDate-datepicker\"]/parent::div")
     private InputWithDatepicker flightDateInput;
 
     @FindBy(id="booking-passengers-input")
@@ -43,6 +44,13 @@ public class MainSearchPage extends BasePage {
 
     @FindBy(xpath = "//a[@data-module=\"ui/CombinationFlightHelper\"]")
     private Link multipleDestinationsLink;
+
+    @FindBy(xpath = "//div[@class=\"header_bar\"]//ul[contains(@class,\"primary-navigation_list\")]")
+    private TopMenu topMenu;
+
+
+    @FindBy(xpath = "(//a[contains(@href,\"/destinations/\" )])[2]")
+    private Link lnkAllDestinations;
 
     public MainSearchPage(String name) {
         super(name);
@@ -121,5 +129,33 @@ public class MainSearchPage extends BasePage {
 
     public void goMultipleDestination() {
         multipleDestinationsLink.click();
+    }
+
+    public void openManageBookingMenu() {
+         topMenu.openMenuManageYourBooking();
+    }
+
+    public void goViewBooking() {
+        topMenu.goViewBooking();
+    }
+
+    public void openServiceMenu() {
+        topMenu.openServiceMenu();
+    }
+
+    public void goHandLuggage() {
+        topMenu.goHandLuggage();
+    }
+
+    public void goAllDestinations() {
+        lnkAllDestinations.click();
+    }
+
+    public void openPlanAndBookMenu() {
+        topMenu.openPlanAndBookMenu();
+    }
+
+    public void goAdvancedSearch() {
+        topMenu.goAdvancedSearch();
     }
 }

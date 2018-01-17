@@ -28,37 +28,16 @@ public class FlightsWeekSection extends AbstractBaseElement {
         super(wrappedElement);
     }
 
-   /* @Override
-    public void init(){
-        super.init();
-        listDaysAvailiable = findElements(new By.ByXPath(DAYS_AVAILIABLE_LIST_LOCATORS));
-
-    }
-*/
 
     public void checkout() {
         if (!isDaySelected()) {
             selectDayByIndex(0);
         }
-        //WebElement el = findElement(new By.ByXPath(BUTTON_SELECT_LOCATOR));
         By by = new By.ByXPath(BUTTON_SELECT_LOCATOR);
         btnSelect = new Button(wrappedElement.findElement(by));
         btnSelect.click();
-        waitUntilSelected();
+        waitReload(5000);
     }
-
-
-    private void waitUntilSelected() {
-       WebElement el = findElement(new By.ByXPath(FLIGHT_SELECTED_DIV_LOCATOR) );
-        //todo
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-    }
-
 
     public int selectDayByIndex(int index) {
 
@@ -66,7 +45,7 @@ public class FlightsWeekSection extends AbstractBaseElement {
         int size = listDaysAvailiable.size();
         if ((size > 0) && (index < size)) {
             listDaysAvailiable.get(index).click();
-            info("select by index:");
+            info(String.format("select by index: %d" ,index));
             return index;
         } else return -1;
 
@@ -82,16 +61,15 @@ public class FlightsWeekSection extends AbstractBaseElement {
     public void assertDaysAvailiable() {
         listDaysAvailiable = findElements(new By.ByXPath(DAYS_AVAILIABLE_LIST_LOCATORS));
         Assert.assertTrue(listDaysAvailiable.size() > 0);
-        assertInfo("Availiable flights exist", "true");
+        checkInfo("Availiable flights exist", "true");
     }
+
+
 
     @Override
     public String getElementType() {
         return "FlightsWeekSection";
     }
 
-    /*@Override
-    public WebElement getWrappedElement() {
-        return null;
-    }*/
+
 }
