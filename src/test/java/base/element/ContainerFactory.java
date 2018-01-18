@@ -2,7 +2,7 @@ package base.element;
 
 import org.openqa.selenium.WebElement;
 
-public class ContainerFactory  {
+public class ContainerFactory {
 
     public <C extends BaseContainer> C create(final Class<C> containerClass, final WebElement wrappedElement) {
         final C container = createInstanceOf(containerClass);

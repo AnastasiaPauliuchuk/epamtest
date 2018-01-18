@@ -7,6 +7,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.ArrayList;
+
 /**
  * @author Anastasia Pauliuchuk
  *         created:  1/15/2018.
@@ -32,40 +34,34 @@ public class HandLuggageInfoPage extends BasePage {
     }
 
     public String getVideoLink() {
-        this.scrollToElement(videoElement);
         iframeElement = videoElement.findElement(new By.ByXPath(IFRAME_LOCATOR));
         WebDriver driver = Browser.getInstance().getDriver();
         driver.switchTo().frame(iframeElement);
-        //String src = iframeElement.getAttribute("src");
-        try {
-            Thread.sleep(6000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         WebElement linkElement = Browser.getInstance().getDriver().findElement(By.xpath(IFRAME_HEAD_LOCATOR));
         String src = linkElement.getAttribute("href");
         driver.switchTo().defaultContent();
-
         return src;
 
     }
 
-    public void goVideoLink(String url) {
-       /* this.scrollToElement(videoElement);
+    public void goVideoLink() {
+        this.scrollToElement(videoElement);
         iframeElement = videoElement.findElement(new By.ByXPath(IFRAME_LOCATOR));
         WebDriver driver = Browser.getInstance().getDriver();
         driver.switchTo().frame(iframeElement);
         WebElement linkElement = Browser.getInstance().getDriver().findElement(By.xpath(IFRAME_HEAD_LOCATOR));
         linkElement.click();
         driver.switchTo().parentFrame();
-        driver.switchTo().defaultContent();*/
-
-       //todo switch to new browser tab
-        Browser.getInstance().getDriver().get(url);
+        ArrayList<String> newTab = new ArrayList<String>(driver.getWindowHandles());
+        driver.switchTo().window(newTab.get(1));
     }
 
     public void assertVideoLink(String expectedLink) {
 
         assertEquals(getVideoLink(),expectedLink);
+    }
+
+    public void scrollToVideo() {
+        this.scrollToElement(videoElement);
     }
 }

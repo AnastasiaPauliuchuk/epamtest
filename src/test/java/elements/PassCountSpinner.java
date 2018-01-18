@@ -22,14 +22,6 @@ public class PassCountSpinner extends AbstractBaseElement {
     public String getElementType() {
         return "Spinner";
     }
-    /*@Override
-    public void init() {
-        super.init();
-        tbxCount = new TextBox(findElement(new By.ByXPath(INPUT_LOCATOR)));
-        btnInc = new Button(findElement(new By.ByXPath(INC_BUTTON_LOCATOR)));
-        btnDec = new Button(findElement(new By.ByXPath(DEC_BUTTON_LOCATOR)));
-
-    }*/
 
     public PassCountSpinner(WebElement wrappedElement) {
         super(wrappedElement);

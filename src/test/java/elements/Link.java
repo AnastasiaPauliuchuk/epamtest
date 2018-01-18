@@ -14,8 +14,6 @@ public class Link extends AbstractBaseElement {
         super(wrappedElement);
     }
 
-
-
     @Override
     public String getElementType() {
         return "Link";

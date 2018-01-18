@@ -14,7 +14,8 @@ public abstract class BaseContainer extends BaseElement {
 
 
     @Override
-    public void init() {}
+    public void init() {
+    }
 
     @Override
     public String getElementType() {

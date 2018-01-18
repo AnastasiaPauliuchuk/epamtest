@@ -1,6 +1,5 @@
 package elements;
 
-import base.browser.Browser;
 import base.element.BaseContainer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -41,7 +40,11 @@ public class InputPassengersExtended extends BaseContainer {
 
     private static final By CONTAINER_LOCATOR = new By.ByXPath(".//div[contains(@class,\"togglepanel-passengers\")]");
     private static final String VALUE_LOCATOR = "parent::div/div";
-    private static final String COUNT_ADULT_PERSON_REGEXP = "(\\d+) Adult.*";
+
+    private static final String COUNT_ADULT_PERSON_REGEXP = "(\\d+) Adult";
+    private static final String COUNT_CHILD_PERSON_REGEXP = "(\\d+) Child";
+    private static final String COUNT_BABY_PERSON_REGEXP = "(\\d+) Bab";
+
     private static final String INPUT_TYPE_LOCATOR_TEMPLATE = "//div[contains(@class,\"%s\") and contains(@class,\"selectfield\")]//input[@type=\"text\"]";
 
 
@@ -57,15 +60,6 @@ public class InputPassengersExtended extends BaseContainer {
     }
 
     private void waitContainerVisibility() {
-        info("wait");
-       /* try {
-            Wait<WebDriver> wait = new FluentWait<WebDriver>(browser.getDriver())
-                    .withTimeout(Long.parseLong(browser.getTimeoutForLoad()), SECONDS)
-                    .pollingEvery(Long.parseLong(browser.getTimeoutForCondition()), SECONDS);
-            wait.until(ExpectedConditions.visibilityOf(btnSave.getWrappedElement()));
-        } catch (Exception e) {
-
-        }*/
        isElementVisible(CONTAINER_MARKER_LOCATOR);
     }
 
@@ -88,49 +82,33 @@ public class InputPassengersExtended extends BaseContainer {
         return passengerSet;
     }
 
-    public void assertAdultPersonCount(int count) {
-        WebElement el = passengerInput.findElement(new By.ByXPath(VALUE_LOCATOR));
-        String value = el.getAttribute("innerHTML");
-        Pattern p = Pattern.compile(COUNT_ADULT_PERSON_REGEXP);
-        Matcher m = p.matcher(value);
-        int i = 0;
-        if (m.find()) {
-            i = Integer.parseInt(m.group(1));
-        }
-        assertEquals(count,i );
-    }
-
     public void assertPassengerSet(PassengerSet pSet) {
         WebElement el = passengerInput.findElement(new By.ByXPath(VALUE_LOCATOR));
         String value = el.getAttribute("innerHTML");
-        //parse string
-    }
 
-    private void setField(int count, PassengerTypes passengerType) {
-        WebElement el = Browser.getInstance().getDriver().findElement(new By.ByXPath(String.format(INPUT_TYPE_LOCATOR_TEMPLATE, passengerType.toString())));
-        TextBox tbxCount = new TextBox(el);
-        tbxCount.clear();
-        tbxCount.type(String.valueOf(count));
-
-    }
-
-
-    public enum PassengerTypes {
-
-        ADULTS("adults"),
-        CHILDS("children"),
-        BABIES("babies");
-
-        public String value;
-
-        PassengerTypes(final String values) {
-            value = values;
+        Pattern p = Pattern.compile(COUNT_ADULT_PERSON_REGEXP);
+        Matcher m = p.matcher(value);
+        int adult = 0;
+        if (m.find()) {
+            adult = Integer.parseInt(m.group(1));
         }
 
-        public String toString() {
-            return value;
+        p = Pattern.compile(COUNT_CHILD_PERSON_REGEXP);
+        m = p.matcher(value);
+        int child = 0;
+        if (m.find()) {
+            child = Integer.parseInt(m.group(1));
         }
+
+        p = Pattern.compile(COUNT_BABY_PERSON_REGEXP);
+        m = p.matcher(value);
+        int baby = 0;
+        if (m.find()) {
+            baby = Integer.parseInt(m.group(1));
+        }
+        assertEquals(new PassengerSet(adult,child,baby), pSet);
     }
+
 
 
 }

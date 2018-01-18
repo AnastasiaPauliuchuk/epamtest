@@ -1,8 +1,7 @@
 package tests;
 
-import base.browser.Browser;
+import base.page.PageManager;
 import base.test.BaseTest;
-import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import pages.LoginPage;
@@ -33,25 +32,27 @@ public class VerifyBookedFlightPrice extends BaseTest {
     @Override
     public  void runTest() {
         step(1,"Open main page");
-        MainSearchPage firstPage = new MainSearchPage("Start Page");
-        firstPage.init((WebDriver) Browser.getInstance().getDriver());
+        MainSearchPage firstPage = PageManager.createPage(MainSearchPage.class,"Start Page");
 
         step(2,"Open popup menu 'Manage your booking'");
         firstPage.openManageBookingMenu();
+
         check("Additional menu drops down");
         step(3,"Select 'View your booking'");
         firstPage.goViewBooking();
-        LoginPage loginPage = new LoginPage("Login");
-        loginPage.init((WebDriver) Browser.getInstance().getDriver());
+        LoginPage loginPage = PageManager.createPage(LoginPage.class,"Login");
+
         step(4, "Type the booking details");
         loginPage.setBookingID(bookingID);
         loginPage.setUsername(username);
         loginPage.setDate(flightDate);
         loginPage.submit();
+
         check("Verify login is successful");
-        loginPage = new LoginPage("Login result");
-        loginPage.init((WebDriver) Browser.getInstance().getDriver());
+        loginPage = PageManager.createPage(LoginPage.class,"Login result");
         loginPage.assertSuccessfulLogin();
-        //todo -  not finished. Figure out the correct login data
+
+
+        //not finished. Figure out the correct login data
     }
 }

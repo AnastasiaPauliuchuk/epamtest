@@ -27,7 +27,7 @@ public class Browser extends Base {
     private static final long SCRIPT_WAIT = 60;
     private static final String DEFAULT_CONDITION_TIMEOUT = "defaultConditionTimeout";
     private static final String DEFAULT_LOAD_TIMEOUT = "defaultPageLoadTimeout";
-    private static final String DEFAULT_ELEMENT_LOAD_TIMEOUT  = "defaultElementNotDisplayedTimeout";
+    private static final String DEFAULT_ELEMENT_LOAD_TIMEOUT = "defaultElementNotDisplayedTimeout";
     private static final String BROWSER_BY_DEFAULT = "chrome";
     private static final String BROWSER_PROP = "browser";
     private static final String START_URL_PROP = "urlStartPage";
@@ -57,7 +57,7 @@ public class Browser extends Base {
             try {
                 driver = BrowserFactory.setUp(currentBrowser.toString());
                 driver.manage().timeouts().implicitlyWait(IMPLICITY_WAIT, TimeUnit.SECONDS);
-                driver.manage().timeouts().setScriptTimeout(500,TimeUnit.SECONDS);
+                driver.manage().timeouts().setScriptTimeout(500, TimeUnit.SECONDS);
             } catch (NamingException e) {
                 e.printStackTrace();
             }
@@ -84,7 +84,7 @@ public class Browser extends Base {
 
     public void open() {
 
-       driver.get(props.getProperty(START_URL_PROP));
+        driver.get(props.getProperty(START_URL_PROP));
 
     }
 
@@ -107,9 +107,6 @@ public class Browser extends Base {
     public String getTimeoutForLoad() {
         return timeoutForLoad;
     }
-    public String getTimeoutForNotDisplayed() {
-        return timeoutForNotDisplayed;
-    }
 
     public RemoteWebDriver getDriver() {
         return driver;
@@ -122,7 +119,6 @@ public class Browser extends Base {
                 .pollingEvery(Long.parseLong(instance.getTimeoutForCondition()), SECONDS)
                 .ignoring(NoSuchElementException.class);
     }
-
 
 
     public enum Browsers {

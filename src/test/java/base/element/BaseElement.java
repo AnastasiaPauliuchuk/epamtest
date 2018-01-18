@@ -4,10 +4,7 @@ import base.Base;
 import base.browser.Browser;
 import base.logging.BaseLogger;
 import base.logging.ElementLogger;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -26,8 +23,6 @@ public abstract class BaseElement extends Base {
     private static final int TIMEOUT_WAIT_0 = 0;
 
     protected String name;
-
-    //protected By locator;
     protected WebElement wrappedElement;
     protected String id;
 
@@ -54,8 +49,6 @@ public abstract class BaseElement extends Base {
             wrappedElement.click();
             info("click");
         }
-
-
     }
 
     public boolean isElementClickable() {
@@ -163,5 +156,13 @@ public abstract class BaseElement extends Base {
         return (list.size() > 0);
     }
 
+
+    public void scrollToElement() {
+        Point p = this.getWrappedElement().getLocation();
+        int y = p.getY();
+        JavascriptExecutor js = ((JavascriptExecutor) Browser.getInstance().getDriver());
+        js.executeScript(String.format("window.scrollTo(0,%d)", y));
+        info("scroll to the element");
+    }
 
 }

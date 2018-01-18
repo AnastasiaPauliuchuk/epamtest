@@ -15,9 +15,7 @@ import java.time.LocalDate;
  */
 public class MainSearchPage extends BasePage {
 
-   private final static String MARKER_LOCATOR = "//section[@data-package=\"search\"]";
-
-    //private final static String MARKER_LOCATOR = "//span[contains(@class,\"icon-calendar\")]";
+    private final static String MARKER_LOCATOR = "//section[@data-package=\"search\"]";
 
     @FindBy(id = "routeSelection_DepartureStation-input")
     private SelectWithAutocomplete selectFrom;
@@ -32,14 +30,14 @@ public class MainSearchPage extends BasePage {
     @FindBy(xpath = "//input[@id=\"dateSelection_IsReturnFlight-datepicker\"]/parent::div")
     private InputWithDatepicker returnDateInput;
 
-//todo locator=div
+    //todo locator=div
     @FindBy(xpath = "//input[@id=\"dateSelection_OutboundDate-datepicker\"]/parent::div")
     private InputWithDatepicker flightDateInput;
 
-    @FindBy(id="booking-passengers-input")
+    @FindBy(id = "booking-passengers-input")
     private InputPassengersExtended passengersInput;
 
-    @FindBy(xpath="//section[@data-package=\"search\"]//button[@type=\"submit\"]")
+    @FindBy(xpath = "//section[@data-package=\"search\"]//button[@type=\"submit\"]")
     private Button searchButton;
 
     @FindBy(xpath = "//a[@data-module=\"ui/CombinationFlightHelper\"]")
@@ -73,6 +71,7 @@ public class MainSearchPage extends BasePage {
     public String selectDepartureByIndex(int index) {
         return selectFrom.selectByIndex(index);
     }
+
     public String selectArrivalByIndex(int index) {
 
         return selectTo.selectByIndex(index);
@@ -81,6 +80,7 @@ public class MainSearchPage extends BasePage {
     public String selectDepartureByName(String placeName) {
         return selectFrom.searchAndSelect(placeName);
     }
+
     public String selectArrivalByName(String placeName) {
 
         return selectTo.searchAndSelect(placeName);
@@ -90,11 +90,13 @@ public class MainSearchPage extends BasePage {
     public void checkReturn() {
         checkReturn.setChecked(true);
     }
+
     public void uncheckReturn() {
         checkReturn.setChecked(false);
     }
+
     public void assertReturnDateDisabled() {
-              returnDateInput.assertIsDisabled();
+        returnDateInput.assertIsDisabled();
     }
 
     public void selectDay(int day) {
@@ -110,18 +112,18 @@ public class MainSearchPage extends BasePage {
     }
 
     public PassengerSet setPassengersCount(PassengerSet passengerSet) {
-       return passengersInput.setPassengersCount(passengerSet);
+        return passengersInput.setPassengersCount(passengerSet);
     }
+
     public PassengerSet setPassengersCountBySpinner(PassengerSet passengerSet) {
         return passengersInput.setPassengersCountBySpinner(passengerSet);
     }
+
     public void assertPassengerSet(PassengerSet pSet) {
         passengersInput.assertPassengerSet(pSet);
     }
 
-    public void assertAdultPassengerCount(int count) {
-        passengersInput.assertAdultPersonCount(count);
-    }
+
     public void search() {
         searchButton.click();
     }
@@ -132,7 +134,7 @@ public class MainSearchPage extends BasePage {
     }
 
     public void openManageBookingMenu() {
-         topMenu.openMenuManageYourBooking();
+        topMenu.openMenuManageYourBooking();
     }
 
     public void goViewBooking() {
@@ -158,4 +160,6 @@ public class MainSearchPage extends BasePage {
     public void goAdvancedSearch() {
         topMenu.goAdvancedSearch();
     }
+
+
 }

@@ -34,7 +34,6 @@ public class SelectOptionsWrapped extends AbstractBaseElement {
 
     public void selectByVisibleText(String text) {
         focus();
-
         dropdown.selectByVisibleText(text);
         info("selected : "+text);
 

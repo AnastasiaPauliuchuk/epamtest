@@ -13,9 +13,8 @@ public class ElementLogger extends BaseLogger {
     private ElementLogger() {
     }
 
-    public static ElementLogger getInstance()
-    {
-        if(instance == null) {
+    public static ElementLogger getInstance() {
+        if (instance == null) {
             instance = new ElementLogger();
         }
         return instance;
@@ -23,7 +22,7 @@ public class ElementLogger extends BaseLogger {
 
     @Override
     public void info(Object o, String msg) {
-        BaseElement element = (BaseElement)o;
+        BaseElement element = (BaseElement) o;
         logger.info(String.format("*** %1$s '%2$s' : %3$s ***", element.getElementType(), element.getElementName(), msg));
     }
 }

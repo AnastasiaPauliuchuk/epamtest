@@ -34,34 +34,30 @@ public abstract class BasePage extends Base {
     public void init(WebDriver driver) {
 
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
-       this.assertDisplayed();
+        this.assertDisplayed();
         info("displayed");
     }
 
     abstract public By getMarkerLocator();
 
 
-
     private void assertDisplayed() {
 
         Assert.assertTrue(isElementVisible(getMarkerLocator()));
-
     }
 
     public void scrollDown() {
         JavascriptExecutor js = ((JavascriptExecutor) Browser.getInstance().getDriver());
         js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
-
+        info("scroll down");
     }
 
     public void scrollToElement(WebElement element) {
         Point p = element.getLocation();
         int y = p.getY();
         JavascriptExecutor js = ((JavascriptExecutor) Browser.getInstance().getDriver());
-        js.executeScript(String.format("window.scrollTo(0, document.body.$d)"),y);
-
+        js.executeScript(String.format("window.scrollTo(0,%d)", y));
+        info("scroll");
     }
-
-
 
 }

@@ -30,7 +30,6 @@ public class FareSelectPage extends BasePage {
     private final static String PRICE_PERSON_LOCATOR_TEMPLATE = "(//td[@class=\"td-content\"]//span[contains(@class,\"price\")])[%d]";
     private final static String PRICE_TOTAL_LOCATOR = "//section[@class=\"price-section\"]//div[@class=\"back\"]";
 
-    //  private final static String OPTION_BUTTON_TEMPLATE_LOCATOR = "//button[@value=\"%s\" and contains(@class,\"button--selection\") and @data-select]";
     private final static String OPTION_BUTTON_TEMPLATE_LOCATOR = " //th[@data-product-class=\"%s\"]";
 
 
@@ -50,6 +49,7 @@ public class FareSelectPage extends BasePage {
     {
         selectOption(MAX_OPTION);
     }
+
     private void selectOption(String option) {
 
         Button btnSelect = new Button(findElement(new By.ByXPath(String.format(OPTION_BUTTON_TEMPLATE_LOCATOR, option))));
@@ -59,7 +59,6 @@ public class FareSelectPage extends BasePage {
     }
 
     public void waitSelected() {
-        //Button btnSelected = new Button(findElement(new By.ByXPath(OPTION_BUTTON_SELECTED_LOCATOR)));
         isElementVisible(new By.ByXPath(OPTION_BUTTON_SELECTED_LOCATOR));
 
     }
@@ -115,8 +114,4 @@ public class FareSelectPage extends BasePage {
     }
 
 
-    public void assertPrices() {
-
-       // Assert.assertEquals(calculateExpectedCost(optionsPage.getPricePerPerson(),optionsPage.getPriceBaby()),optionsPage.getTotalPrice());
-    }
 }

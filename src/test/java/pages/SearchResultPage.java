@@ -1,12 +1,10 @@
 package pages;
 
-import base.browser.Browser;
 import base.page.BasePage;
 import elements.Button;
 import elements.FlightsWeekSection;
 import elements.Label;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
@@ -58,7 +56,6 @@ public class SearchResultPage extends BasePage {
 
     public void assertPrice() {
 
-
         double priceOut = 0.00;
         double priceIn = 0.00;
         double priceTotal = 0.00;
@@ -82,20 +79,12 @@ public class SearchResultPage extends BasePage {
     }
 
     public void selectNearestOutboundDay() {
-        // outboundSection.selectDayByIndex(0);
         outboundSection.checkout();
     }
 
     public void selectNearestInboundDay() {
-        //todo
-        JavascriptExecutor js = ((JavascriptExecutor) Browser.getInstance().getDriver());
-        js.executeScript("window.scrollTo(0, document.body.scrollHeight-400)");
-
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        this.scrollToElement(inboundSection.getWrappedElement());
+        waitReload(2000);
         inboundSection.checkout();
 
     }

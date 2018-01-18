@@ -23,6 +23,7 @@ public class DatapickerContainer extends AbstractBaseElement {
     private static final String PREV_MONTH_BUTTON_LOCATOR = "div/div/a[contains(@class,\"ui-datepicker-prev\")]";
     private static final String MONTH_LABEL = "//span[contains(@class,\"ui-datepicker-month\")]";
     private static final String YEAR_LABEL = "//span[contains(@class,\"ui-datepicker-year\")]";
+
     public DatapickerContainer(WebElement wrappedElement) {
         super(wrappedElement);
     }
@@ -48,15 +49,6 @@ public class DatapickerContainer extends AbstractBaseElement {
     }
 
     public void incrementMonth() {
-       /* WebElement nextElement = this.findElement(new By.ByXPath(NEXT_MONTH_BUTTON_LOCATOR));
-        BaseElement nextMonth = new Button(nextElement);
-        info("increment month");
-        nextMonth.click();
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }*/
         switchMonth(-1);
     }
 
@@ -82,7 +74,7 @@ public class DatapickerContainer extends AbstractBaseElement {
 
         Label currentMonth = new Label(findElement(new By.ByXPath(MONTH_LABEL)));
         Label currentYear = new Label(findElement(new By.ByXPath(YEAR_LABEL)));
-        info(String.format("set %1$s %2$s",currentMonth.getText(),currentYear.getText()));
+        info(String.format("set %1$s %2$s", currentMonth.getText(), currentYear.getText()));
     }
 
 }

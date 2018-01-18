@@ -27,4 +27,33 @@ public class PassengerSet {
     public int getBabyCount() {
         return babyCount;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        PassengerSet that = (PassengerSet) o;
+
+        if (adultCount != that.adultCount) return false;
+        if (childCount != that.childCount) return false;
+        return babyCount == that.babyCount;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = adultCount;
+        result = 31 * result + childCount;
+        result = 31 * result + babyCount;
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "PassengerSet{" +
+                "adultCount=" + adultCount +
+                ", childCount=" + childCount +
+                ", babyCount=" + babyCount +
+                '}';
+    }
 }

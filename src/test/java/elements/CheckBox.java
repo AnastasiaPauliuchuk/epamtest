@@ -10,7 +10,6 @@ import org.openqa.selenium.WebElement;
  */
 public class CheckBox extends AbstractBaseElement {
 
-    //private final static String LABEL_FOR_LOCATOR;
     public CheckBox(WebElement wrappedElement) {
         super(wrappedElement);
     }

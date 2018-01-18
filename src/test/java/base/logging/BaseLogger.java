@@ -8,12 +8,6 @@ import org.apache.log4j.Logger;
  */
 public class BaseLogger {
 
-   /* fatal,
-    error
-    warn
-    info
-    debug
-    trace*/
 
     protected static Logger logger = Logger.getLogger(BaseLogger.class);
 
@@ -30,10 +24,10 @@ public class BaseLogger {
     }
 
     public void assertInfo(Object o, final Object expected, final Object actual) {
-        logger.info(String.format("[Assertion: expected ='%1$s', actual = '%2$s'])",expected.toString(),actual.toString()));
+        logger.info(String.format("[Assertion: expected ='%1$s', actual = '%2$s'])", expected.toString(), actual.toString()));
     }
 
     public void assertCheck(Object o, final Object result, final Object condition) {
-        logger.info(String.format("[Verify: condition ='%1$s', result = '%2$s'])",condition.toString(),result.toString()));
+        logger.info(String.format("[Verify: condition ='%1$s', result = '%2$s'])", condition.toString(), result.toString()));
     }
 }

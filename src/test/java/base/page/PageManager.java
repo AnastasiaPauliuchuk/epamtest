@@ -9,14 +9,14 @@ import java.lang.reflect.InvocationTargetException;
  * @author Anastasia Pauliuchuk
  *         created:  1/17/2018.
  */
-public class PageManager  {
+public class PageManager {
 
     public static <E extends BasePage> E createPage(final Class<E> elementClass, String pageName) {
         try {
-            final E page =  elementClass
+            final E page = elementClass
                     .getDeclaredConstructor(String.class)
                     .newInstance(pageName);
-            page.init((WebDriver) Browser.getInstance().getDriver()  );
+            page.init((WebDriver) Browser.getInstance().getDriver());
             return page;
         } catch (InstantiationException e) {
             throw new RuntimeException(e);
@@ -29,7 +29,6 @@ public class PageManager  {
         }
 
     }
-
 
 
 }

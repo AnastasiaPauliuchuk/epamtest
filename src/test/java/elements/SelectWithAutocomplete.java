@@ -12,8 +12,7 @@ public class SelectWithAutocomplete extends AbstractBaseElement {
 
 
     private static final String OPTION_BY_INDEX_SELECTOR_TEMPLATE_XPATH = "//ol[@class=\"results\"]/li[@data-relative-index=%d]";
-  //  private static final String OPTION_BY_TEXT_SELECTOR_TEMPLATE_XPATH = "//ol[@class=\"results\"]//*[contains(text(),\"%s\")]/parent::li";
-      private static final String OPTION_BY_TEXT_SELECTOR_TEMPLATE_XPATH = "//ol[@class=\"results\"]//*[contains(text(),\"%s\")]";
+    private static final String OPTION_BY_TEXT_SELECTOR_TEMPLATE_XPATH = "//ol[@class=\"results\"]//*[contains(text(),\"%s\")]";
 
     private static final String OPTION_BY_INDEX_RELOADED_SELECTOR_TEMPLATE_XPATH =
             "//ol[@class=\"results\"]/li[@data-relative-index=%d and @data-parent-index=0]";
@@ -30,7 +29,6 @@ public class SelectWithAutocomplete extends AbstractBaseElement {
     }
 
 
-
     public String getElementType() {
         return "Select";
     }
@@ -45,12 +43,6 @@ public class SelectWithAutocomplete extends AbstractBaseElement {
         return value;
     }
 
-   /* public void selectByText(String value) {
-        wrappedElement.click();
-        WebElement el = wrappedElement.findElement(getOptionLocator(value));
-        el.click();
-        info(String.format("select <%s>", value));
-    }*/
 
     public String searchAndSelect(String placeName) {
         wrappedElement.clear();
@@ -58,7 +50,6 @@ public class SelectWithAutocomplete extends AbstractBaseElement {
         WebElement el = wrappedElement.findElement(getOptionLocator(placeName));
         String value = el.getAttribute("innerHTML");
         el.click();
-
         info(String.format("select <%s>", value));
         return value;
     }
@@ -66,7 +57,7 @@ public class SelectWithAutocomplete extends AbstractBaseElement {
 
     public void assertSelectedText(String selectedValue) {
         String actual = getElementText();
-        assertEquals(actual,selectedValue);
+        assertEquals(actual, selectedValue);
 
     }
 
@@ -99,7 +90,6 @@ public class SelectWithAutocomplete extends AbstractBaseElement {
         WebElement element = findElement(loc);
         return element.getAttribute("innerHTML");
     }
-
 
 
 }

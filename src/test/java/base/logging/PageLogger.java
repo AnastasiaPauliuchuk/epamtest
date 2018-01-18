@@ -10,12 +10,10 @@ public class PageLogger extends BaseLogger {
 
     private static PageLogger instance = null;
 
-    private PageLogger() {
-    }
+    private PageLogger() {    }
 
-    public static PageLogger getInstance()
-    {
-        if(instance == null) {
+    public static PageLogger getInstance() {
+        if (instance == null) {
             instance = new PageLogger();
         }
         return instance;
@@ -23,7 +21,7 @@ public class PageLogger extends BaseLogger {
 
     @Override
     public void info(Object o, String msg) {
-        BasePage page = (BasePage)o;
+        BasePage page = (BasePage) o;
         logger.info(String.format("** Page '%1$s': %2$s **", page.getName(), msg));
     }
 

@@ -16,7 +16,7 @@ import java.time.LocalDate;
 public class SearchCombinationFlightPage extends BasePage {
 
 
-    private static final String DATE_FORMAT ="dd-mm-yyyy"; //todo format read from ui
+    private static final String DATE_FORMAT ="dd-mm-yyyy";
     @FindBy(id="openJawRouteSelection_DepartureStationOutbound-input")
     SelectWithAutocomplete departureOutbound;
 

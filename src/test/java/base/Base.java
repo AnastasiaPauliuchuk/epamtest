@@ -34,20 +34,22 @@ abstract public class Base {
     protected void warn(String msg) {
         logger.warn(this, msg);
     }
+
     protected void fatal(String msg) {
         logger.fatal(this, msg);
     }
+
     public void assertinfo(final Object actual, final Object expected) {
-       info(String.format("[Assertion: expected ='%1$s', actual = '%2$s'])",expected.toString(),actual.toString()));
+        info(String.format("[Assertion: expected ='%1$s', actual = '%2$s'])", expected.toString(), actual.toString()));
     }
 
     public void checkInfo(final Object condition, final Object result) {
-        info(String.format("[Assertion: '%1$s' is '%2$s'])",condition.toString(),result.toString()));
+        info(String.format("[Assertion: '%1$s' is '%2$s'])", condition.toString(), result.toString()));
     }
 
     public void assertEquals(final Object actual, final Object expected) {
-        assertinfo(actual,expected);
-        Assert.assertEquals(actual,expected);
+        assertinfo(actual, expected);
+        Assert.assertEquals(actual, expected);
     }
 
     public WebElement findElement(By by) {
@@ -74,12 +76,12 @@ abstract public class Base {
 
 
     public boolean isElementPresent(By by) {
-        List <WebElement> list = Browser.getInstance().getDriver().findElements(by);
-        return (list.size()>0);
+        List<WebElement> list = Browser.getInstance().getDriver().findElements(by);
+        return (list.size() > 0);
     }
 
     public boolean isElementVisible(By by) {
-        if(isElementPresent(by)) {
+        if (isElementPresent(by)) {
             try {
                 Wait<WebDriver> wait =
                         new FluentWait<WebDriver>(Browser.getInstance().getDriver())
@@ -96,7 +98,6 @@ abstract public class Base {
         }
         return false;
     }
-
 
 
     public void waitReload(int millis) {

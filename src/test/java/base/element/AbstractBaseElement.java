@@ -15,9 +15,9 @@ public abstract class AbstractBaseElement extends BaseElement {
         this.wrappedElement = wrappedElement;
 
     }
-   public void init() {
-    }
 
+    public void init() {
+    }
 
     public AbstractBaseElement(By by) {
 

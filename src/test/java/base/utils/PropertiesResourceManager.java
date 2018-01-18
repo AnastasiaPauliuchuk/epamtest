@@ -1,5 +1,9 @@
 package base.utils;
 
+import base.Base;
+import base.logging.BaseLogger;
+import base.logging.TestLogger;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -8,7 +12,7 @@ import java.util.Properties;
  * @author Anastasia Pauliuchuk
  *         created:  1/3/2018.
  */
-public class PropertiesResourceManager {
+public class PropertiesResourceManager extends Base {
 
     private Properties properties = new Properties();
 
@@ -19,6 +23,7 @@ public class PropertiesResourceManager {
 
     public PropertiesResourceManager(final String resourceName) {
         properties = appendFromResource(properties, resourceName);
+
     }
 
 
@@ -33,7 +38,7 @@ public class PropertiesResourceManager {
                 e.printStackTrace();
             }
         } else {
-         //   System.err.println(String.format("Resource \"%1$s\" could not be found", resourceName));
+                  fatal(String.format("Resource \"%1$s\" could not be found", resourceName));
         }
         return objProperties;
     }
@@ -47,4 +52,8 @@ public class PropertiesResourceManager {
         return properties.getProperty(key, defaultValue);
     }
 
+    @Override
+    protected BaseLogger createLoggerFactoryMethod() {
+        return TestLogger.getInstance();
+    }
 }

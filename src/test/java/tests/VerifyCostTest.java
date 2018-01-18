@@ -1,9 +1,7 @@
 package tests;
 
-import base.browser.Browser;
+import base.page.PageManager;
 import base.test.BaseTest;
-import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import pages.FareSelectPage;
@@ -36,42 +34,38 @@ public class VerifyCostTest extends BaseTest {
 
     @Override
     public void runTest() {
-        Browser.getInstance().getDriver().navigate().refresh();
         step(1, "Open main page");
+        MainSearchPage firstPage = PageManager.createPage(MainSearchPage.class,"Start page");
 
-        MainSearchPage firstPage = new MainSearchPage("Start page");
-
-        firstPage.init((WebDriver) Browser.getInstance().getDriver());
-        step(2, "Select departure airport");
+        step("1.1", "Select departure airport using autocomplete");
         firstPage.selectDepartureByName(departure);
-        step(3, "Select arrival airport");
+
+        step("1.2", "Select arrival airport using autocomplete");
         firstPage.selectArrivalByName(arrival);
-        step(4, "Select passengers count");
+
+        step("1.3", "Select passengers count using spinner");
         firstPage.setPassengersCountBySpinner(passengerSet);
-        step(5, "Submit form");
+
+        step("1.4", "Submit form");
         firstPage.search();
+        SearchResultPage secondPage =  PageManager.createPage( SearchResultPage.class,"Search results");
 
-        SearchResultPage secondPage = new SearchResultPage("Search results");
-        secondPage.init((WebDriver) Browser.getInstance().getDriver());
-        secondPage.assertFlightAvailiable();
+        step("1.5","Select outbound flight");
         secondPage.selectNearestOutboundDay();
+
+        step("1.6","Select inbound flight");
         secondPage.selectNearestInboundDay();
+
+        step("1.7","Click 'Next'");
         secondPage.next();
+        FareSelectPage optionsPage = PageManager.createPage(FareSelectPage.class,"Fare select");
 
-        FareSelectPage optionsPage = new FareSelectPage("Fare select");
-        optionsPage.init((WebDriver) Browser.getInstance().getDriver());
-
-
+        step("1.8","Select 'Plus' Fare");
         optionsPage.selectPlusOption();
-      //  optionsPage.assertPrices();
-        //todo
-        Assert.assertEquals(calculateExpectedCost(optionsPage.getPricePerPerson(),optionsPage.getPriceBaby()),optionsPage.getTotalPrice());
 
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        check("Verify total price");
+        assertEquals(calculateExpectedCost(optionsPage.getPricePerPerson(),optionsPage.getPriceBaby()),optionsPage.getTotalPrice());
+
 
     }
 }

@@ -1,8 +1,7 @@
 package tests;
 
-import base.browser.Browser;
+import base.page.PageManager;
 import base.test.BaseTest;
-import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import pages.MainSearchPage;
@@ -27,23 +26,21 @@ public class NoFlightFoundTest extends BaseTest {
     @Override
     public void runTest() {
 
-        Browser.getInstance().getDriver().navigate().refresh();
-        step(1, "Open main page");
+        step("1.1", "Open main page");
+        MainSearchPage firstPage = PageManager.createPage(MainSearchPage.class,"Start page");
 
-        MainSearchPage firstPage = new MainSearchPage("Start page");
-
-        firstPage.init((WebDriver) Browser.getInstance().getDriver());
-        step(2, "Select departure airport");
+        step("1.2", "Select departure airport");
         firstPage.selectDepartureByName(departure);
-        step(3, "Select arrival airport");
+
+        step("1.3", "Select arrival airport");
         firstPage.selectArrivalByName(arrival);
-        step(4, "Submit form");
+
+        step("1.4", "Submit form");
         firstPage.search();
-        step(5,"Search results page is opened");
-        SearchResultPage secondPage = new SearchResultPage("Search results");
-        secondPage.init((WebDriver) Browser.getInstance().getDriver());
+        SearchResultPage searchResultPage = PageManager.createPage(SearchResultPage.class,"Search results");
+
         check("Error message is found");
-        secondPage.assertFlightsNotFound();
+        searchResultPage.assertFlightsNotFound();
 
     }
 

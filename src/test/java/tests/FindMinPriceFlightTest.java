@@ -1,8 +1,7 @@
 package tests;
 
-import base.browser.Browser;
+import base.page.PageManager;
 import base.test.BaseTest;
-import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import pages.FindPerfectDestinationPage;
@@ -44,41 +43,45 @@ public class FindMinPriceFlightTest extends BaseTest {
     @Override
     public void runTest() {
         step(1, "Open main page");
-        MainSearchPage firstPage = new MainSearchPage("Start Page");
-        firstPage.init((WebDriver) Browser.getInstance().getDriver());
+        MainSearchPage firstPage = PageManager.createPage(MainSearchPage.class,"Start Page");
+
         step(2, "Open 'Plan and Book' additional menu");
         firstPage.openPlanAndBookMenu();
+
         step(3, "Click 'Advanced search' link");
         firstPage.goAdvancedSearch();
-
-        FindPerfectDestinationPage findPerfectDestinationPage = new FindPerfectDestinationPage("Find Destinations");
-        findPerfectDestinationPage.init((WebDriver) Browser.getInstance().getDriver());
+        FindPerfectDestinationPage findPerfectDestinationPage = PageManager.createPage(FindPerfectDestinationPage.class,"Find Destinations");
 
         step(4, "Select departure country");
         findPerfectDestinationPage.selectDeparture(departure);
+
         step(5, "Select arrival country");
         findPerfectDestinationPage.selectArrival(arrival);
+
         step(6, "Click 'When will you be taking off'");
         findPerfectDestinationPage.openWhenSection();
+
         step(7, "Select 'Single flight'");
         findPerfectDestinationPage.setSingleTrip();
+
         step(8, "Select 'Specific month'");
         findPerfectDestinationPage.setDateTypeMonth();
+
         step(9, "Select the month from the list");
         findPerfectDestinationPage.setMonth(flightDate);
+
         step(10, "Click 'Day of the week dropdown' menu, choose 'Any day of the week'");
         findPerfectDestinationPage.setAnyDayOfWeek();
+
         step(11, "Submit form");
         findPerfectDestinationPage.search();
+
         check("Verify the destination");
         findPerfectDestinationPage.assertMinPriceDestination(expectedStation,expectedCountry);
+
         check("Verify the price");
         findPerfectDestinationPage.assertMinPrice(expectedPrice);
 
-        try {
-            Thread.sleep(6000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
     }
 }
